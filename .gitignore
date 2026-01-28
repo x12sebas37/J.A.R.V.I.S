@@ -1,0 +1,18 @@
+# Llaves secretas (¡LO MÁS IMPORTANTE!)
+.env
+
+# Archivos temporales de audio
+temp_audio.mp3
+
+# Python (archivos de sistema)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Logs de error
+*.log
