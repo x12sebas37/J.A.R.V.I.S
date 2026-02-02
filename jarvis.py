@@ -5,6 +5,7 @@ from elevenlabs.client import ElevenLabs
 import pygame # Usaremos esto para reproducir
 import time
 import os
+import discord
 
 load_dotenv()
 
@@ -63,6 +64,8 @@ def hablar(texto):
     except Exception as e:
         print(f"Error en el sistema de audio: {e}")
 
+        pass
+
 def escuchar():
     """Escucha el micrófono y lo pasa a texto"""
     reconocedor = sr.Recognizer()
@@ -90,18 +93,22 @@ def pensar(pregunta):
         return respuesta
     except:
         return "Señor, el servidor de Groq no responde."
-
-# --- 3. BUCLE PRINCIPAL ---
-if __name__ == "__main__":
-    hablar("Sistemas listos. Conexión neuronal establecida.")
     
+def ejecutar_asistente_voz():
+    print("Sistemas de audio iniciados")
     while True:
         orden = escuchar()
         if orden:
             if any(p in orden.lower() for p in ["salir", "adiós", "descansa"]):
-                hablar("Entendido. Desconectando.")
+                hablar("Entendido, señor. Desconectando sistemas de audio.")
                 break
             
+            # Procesamiento normal
             respuesta_ia = pensar(orden)
+            import time
             time.sleep(0.3)
             hablar(respuesta_ia)
+
+# --- 3. BUCLE PRINCIPAL ---
+if __name__ == "__main__":
+        ejecutar_asistente_voz()
