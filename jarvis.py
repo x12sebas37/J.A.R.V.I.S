@@ -5,7 +5,6 @@ from elevenlabs.client import ElevenLabs
 import pygame # Usaremos esto para reproducir
 import time
 import os
-import discord
 
 load_dotenv()
 

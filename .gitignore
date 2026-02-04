@@ -5,7 +5,6 @@
 temp_audio.mp3
 
 # Python (archivos de sistema)
-__pycache__/
 *.py[cod]
 *$py.class
 venv/
