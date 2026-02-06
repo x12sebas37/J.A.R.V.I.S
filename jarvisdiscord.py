@@ -15,6 +15,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print(f"Sistemas de discord en linea. Sesion iniciada en: {client.user}")
+    modulo_servidor.iniciar_vigilancia(client)
 
 @client.event
 async def on_message(message):

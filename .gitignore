@@ -1,5 +1,6 @@
 # Llaves secretas (¡LO MÁS IMPORTANTE!)
 .env
+credenciales.json
 
 # Archivos temporales de audio
 temp_audio.mp3
