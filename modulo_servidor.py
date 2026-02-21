@@ -33,7 +33,7 @@ class PanelPedidos(discord.ui.View):
 
 def iniciar_vigilancia(client_principal):
     global client
-    client = client_principal # Ahora el módulo ya conoce al transmisor
+    client = client_principal 
     auto_pedido.start()
 
 @tasks.loop(seconds=30)
@@ -43,14 +43,12 @@ async def auto_pedido():
     pedidos_actuales = obtener_pedidos()
     conteo_ahora = len(pedidos_actuales)
 
-    # Todo lo que sigue debe estar DENTRO de este primer IF
     if conteo_ahora > total_pedidos_vistos: 
 
         if total_pedidos_vistos == 0: 
             total_pedidos_vistos = conteo_ahora
             return
             
-        # Observe el espacio extra a la izquierda de estas líneas:
         print("Nuevo pedido detectado")
         ultimo_pedido = pedidos_actuales[-1]
 
@@ -69,7 +67,6 @@ async def auto_pedido():
 
             await canal_reportes.send(embed=embed, view=vista)
 
-        # Actualizamos la memoria solo cuando terminamos de avisar
         total_pedidos_vistos = conteo_ahora
 
 

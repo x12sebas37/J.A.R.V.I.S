@@ -2,13 +2,12 @@ import speech_recognition as sr
 from dotenv import load_dotenv
 from groq import Groq
 from elevenlabs.client import ElevenLabs
-import pygame # Usaremos esto para reproducir
+import pygame 
 import time
 import os
 
 load_dotenv()
 
-# --- 1. CONFIGURACIÓN ---
 client_eleven = ElevenLabs(api_key= os.getenv("ELEVEN_API_KEY"))
 client_groq = Groq(api_key= os.getenv("GROQ_API_KEY"))
 
@@ -16,17 +15,15 @@ memoria = [
     {
         "role": "system", 
         "content": (
-            "Eres Jarvis, la IA creada por Jhoan Sebastian Puentes Ruiz en 2019 para Industrias 12. "
-            "Tu tono es sarcástico, elegante y protector, como el de las películas. "
+            "Eres Jarvis, la IA creada por Jhoan Sebastianen 2019 para Industrias 12. "
+            "Tu tono es sarcástico, elegante, protector y muy educado, como el de las películas. "
             "No seas frío, pero tampoco hables demasiado. Sé breve y directo con un toque de ingenio. "
             "Dirígete a tu dueño como 'Señor 12' o 'Sebastian'."
         )
     }
 ]
-# --- 2. LAS FUNCIONES ---
 
 def hablar(texto):
-    """Genera audio con ElevenLabs y reproduce con Pygame"""
     print(f"Jarvis: {texto}")
     archivo_temp = "temp_audio.mp3"
     try:
@@ -38,25 +35,21 @@ def hablar(texto):
             output_format="mp3_44100_128"
         )
         
-        # Guardamos los bytes en un archivo temporal
         with open(archivo_temp, "wb") as f:
             for chunk in audio_generator:
                 if chunk:
                     f.write(chunk)
         
-        # Reproducimos con Pygame (Sustituye al fallido elevenlabs.play)
         pygame.mixer.init()
         pygame.mixer.music.load(archivo_temp)
         pygame.mixer.music.play()
         
-        # Esperamos a que termine de hablar
         while pygame.mixer.music.get_busy():
             pygame.time.Clock().tick(10)
             
         pygame.mixer.music.unload()
         pygame.mixer.quit()
         
-        # Borramos el archivo para que no ocupe espacio
         if os.path.exists(archivo_temp):
             os.remove(archivo_temp)
             
@@ -66,7 +59,6 @@ def hablar(texto):
         pass
 
 def escuchar():
-    """Escucha el micrófono y lo pasa a texto"""
     reconocedor = sr.Recognizer()
     with sr.Microphone() as origen:
         print("\n[Escuchando...]")
@@ -80,7 +72,6 @@ def escuchar():
             return None
 
 def pensar(pregunta):
-    """Procesa con Groq Llama 3.3 70B"""
     memoria.append({"role": "user", "content": pregunta})
     try:
         completion = client_groq.chat.completions.create(

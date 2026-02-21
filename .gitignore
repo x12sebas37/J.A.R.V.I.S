@@ -1,18 +1,13 @@
-# Llaves secretas (¡LO MÁS IMPORTANTE!)
 .env
 credenciales.json
 
-# Archivos temporales de audio
 temp_audio.mp3
 
-# Python (archivos de sistema)
 *.py[cod]
 *$py.class
 venv/
 env/
 
-# VS Code
 .vscode/
 
-# Logs de error
 *.log
